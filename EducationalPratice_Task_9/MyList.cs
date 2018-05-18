@@ -82,9 +82,7 @@ namespace Task_9
             if (removeList.Next.Data == element)
             {
                 _counter--;//уменьшить количество элементов
-
                 if (removeList.Next.Next == null) return removeList;//пропуск элементов
-
                 removeList.Next = removeList.Next.Next;//пропуск элемента для удаления
                 return removeList;
             }
