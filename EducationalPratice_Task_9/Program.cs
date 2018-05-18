@@ -14,8 +14,9 @@ namespace Task_9
             
             MyList.RecurrentCreate(list.Capacity, ref list);
             MyList.Print(list);
-            Console.WriteLine("Введите элемент для удаления");
-            MyList.RecurentRemove(InputValidator.InputPositive(),ref list);
+            
+            Console.Write("\nВведите элемент для удаления :=");
+            list =MyList.RecurentRemove(list,InputValidator.InputPositive());
             MyList.Print(list);
             Console.ReadKey();
         }

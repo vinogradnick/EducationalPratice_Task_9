@@ -68,23 +68,23 @@ namespace Task_9
         /// <param name="list"></param>
         /// <param name="element"></param>
         /// <returns></returns>
-        public static void  RecurentRemove(int element,ref MyList removeList)
+        public static MyList RecurentRemove(MyList removeList, int element)
         {
-            MyList tempList = removeList;
-            if (tempList != null)
+            if (removeList == null) return removeList;
+
+            if (removeList.Data == element)
             {
-                if (tempList.Next.Data == element)
-                {
-                    tempList = tempList.Next.Next;
-                    return tempList;
-                }
-                else
-                {
-                    RecurentRemove(element, ref tempList.Next);
-                }
+                removeList = removeList.Next;
+                return removeList;
             }
-            else
-                return;
+            
+            if (removeList.Next.Data == element)
+            {
+                _counter--;
+                removeList.Next = removeList.Next.Next;
+                return removeList;
+            }
+            return RecurentRemove(removeList.Next, element);
         }
         /// <summary>
         /// Рекурентное создание списка
