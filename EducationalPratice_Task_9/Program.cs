@@ -8,7 +8,7 @@ namespace Task_9
       
         static void Main(string[] args)
         {
-            Console.WriteLine("Введите размер коллекции");
+            Console.Write("Введите размер коллекции ");
 
             MyList list = new MyList(){Capacity=InputValidator.InputPositive()};
             

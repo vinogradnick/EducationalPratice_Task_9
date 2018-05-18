@@ -70,20 +70,27 @@ namespace Task_9
         /// <returns></returns>
         public static MyList RecurentRemove(MyList removeList, int element)
         {
+            //проверка элемента на пустоту
             if (removeList == null) return removeList;
-
+            //удаление первого элемента однонаправленного списка
             if (removeList.Data == element)
             {
                 removeList = removeList.Next;
                 return removeList;
             }
-            
+            //удаление элемента с 2 до предпоследнего
             if (removeList.Next.Data == element)
             {
-                _counter--;
-                removeList.Next = removeList.Next.Next;
+                _counter--;//уменьшить количество элементов
+                if (removeList.Next.Next == null)
+                {
+                    removeList.Next = null;
+                    return removeList;
+                }
+                removeList.Next = removeList.Next.Next;//пропуск элемента для удаления
                 return removeList;
             }
+            //переход к следующему элементу
             return RecurentRemove(removeList.Next, element);
         }
         /// <summary>
@@ -101,6 +108,7 @@ namespace Task_9
             {
                 _counter++; //Увелечение счетчика
                 Console.Write("Введите значение для элемнента списка " + _counter + " |:=");
+
                 MyList point = MakePoint(InputValidator.InputPositive());
                 list = point;
                 RecurrentCreate(size,ref list.Next);
