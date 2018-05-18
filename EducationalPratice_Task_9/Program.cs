@@ -1,4 +1,5 @@
 ﻿using System;
+using Validator;
 
 namespace Task_9
 {
@@ -7,13 +8,15 @@ namespace Task_9
       
         static void Main(string[] args)
         {
-            int data = 0;
-            int counter = 0;
-            MyList list = new MyList(data);
-            list = MyList.RecurrentCreate(list,data,10,ref counter);//Рекурсивное создание списка
-            list.Print(list);
-            list = MyList.RecurentRemove(list, list.Next, list.Data, 10);
-            list.Print(list);
+            Console.WriteLine("Введите размер коллекции");
+
+            MyList list = new MyList(){Capacity=InputValidator.InputPositive()};
+            
+            MyList.RecurrentCreate(list.Capacity, ref list);
+            MyList.Print(list);
+            Console.WriteLine("Введите элемент для удаления");
+            MyList.RecurentRemove(InputValidator.InputPositive(),ref list);
+            MyList.Print(list);
             Console.ReadKey();
         }
     }

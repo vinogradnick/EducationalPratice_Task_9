@@ -1,4 +1,5 @@
 ﻿using System;
+using Validator;
 
 namespace Task_9
 {
@@ -20,7 +21,15 @@ namespace Task_9
         /// </summary>
         public MyList Next;
 
-        private static int Count { get; set; }//Количество элементов в списке
+        private static int _counter;
+        private static int _capacity;
+        public int Capacity
+        {
+            get => _capacity;
+            set {if(value > 0) _capacity = value;}
+        }
+
+        public static int Count => _counter;//Количество элементов в списке
         public MyList(int _data)
         {
             Data = _data;
@@ -31,6 +40,8 @@ namespace Task_9
             Data = 0;
             Next = null;
         }
+        
+       
         /// <summary>
         /// Создание списка 
         /// </summary>
@@ -55,23 +66,25 @@ namespace Task_9
         /// Рекурсивное удаление элементов
         /// </summary>
         /// <param name="list"></param>
+        /// <param name="element"></param>
         /// <returns></returns>
-        public static MyList RecurentRemove(MyList pred, MyList current, int head, int query)
+        public static void  RecurentRemove(int element,ref MyList removeList)
         {
-            if (current != null || current.Data != head)
+            MyList tempList = removeList;
+            if (tempList != null)
             {
-                if (current.Data == query)
+                if (tempList.Next.Data == element)
                 {
-                    pred.Next = current.Next;
-                    return pred;
+                    tempList = tempList.Next.Next;
+                    return tempList;
                 }
                 else
                 {
-                    pred.Next = current;
-                    current = RecurentRemove(pred, current.Next, head, query);
+                    RecurentRemove(element, ref tempList.Next);
                 }
             }
-            return pred;
+            else
+                return;
         }
         /// <summary>
         /// Рекурентное создание списка
@@ -81,35 +94,29 @@ namespace Task_9
         /// <param name="size">Размер списка</param>
         /// <param name="counter">Счетчик списка</param>
         /// <returns></returns>
-        public static MyList RecurrentCreate(MyList list, int data, int size, ref int counter)
+        public static void RecurrentCreate(int size,ref MyList list)
         {
-            if (size != counter)
+            
+            if (size != _counter)
             {
-                counter++;//Увелечение счетчика
-                Count = counter;//Добавление в счет элементов списка
-                MyList point = MakePoint(data);
-                list.Next = point;
+                _counter++; //Увелечение счетчика
+                Console.Write("Введите значение для элемнента списка " + _counter + " |:=");
+                MyList point = MakePoint(InputValidator.InputPositive());
                 list = point;
-                list.Next = RecurrentCreate(list, int.Parse(Console.ReadLine()), size, ref counter);//Переход к следующему элементу списка
-                return list;
+                RecurrentCreate(size,ref list.Next);
             }
             else
-                return list;
+                return;
         }
 
-        public void Print(MyList list)
+       
+        public static void Print(MyList list)
         {
-            int counter = 0;
-            if (list != null)
+            while (list !=null)
             {
-                while (list != null && Count != counter)
-                {
-                    counter++;
-                    Console.WriteLine(list.Data + " ");
-                    list = list.Next;
-                }
+                Console.Write(list.Data+" ");
+                list = list.Next;
             }
-
         }
 
         /// <summary>
