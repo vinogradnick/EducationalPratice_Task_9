@@ -73,6 +73,12 @@ namespace Task_9
             }
 
         }
+        /// <summary>
+        /// Рекурсивное удаление элементов из списка
+        /// </summary>
+        /// <param name="element">Первый элемент списка</param>
+        /// <param name="value">Значение элемента в списке</param>
+        /// <returns></returns>
         public Point RecurrentRemove(Point element, int value)
         {
             if (element.Next.Data == value)
@@ -87,7 +93,7 @@ namespace Task_9
         {
             Point current = First;
             Console.Write(current.Data+" ");
-            current = current.Next;
+            current = First.Next;
             while (current != First)
             {
                 Console.Write(current.Data+" ");
