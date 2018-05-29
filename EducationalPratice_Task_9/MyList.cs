@@ -35,20 +35,20 @@ namespace Task_9
                 {
 
                     First = Element;
-                    Console.WriteLine($"Введите {count}-е число ");
+                    Console.Write($"Введите {count}-е число :");
                     int data = Input.Int32();
                     First.Next = RecurrentCreate(new Point(data, null));
                 }
                 else
                 {
-                    Console.WriteLine($"Введите {count}-е число ");
+                    Console.Write($"Введите {count}-е число :");
                     int data = Input.Int32();
                     Element.Next = RecurrentCreate(new Point(data, null));
                 }
             }
             else
             {
-                Console.WriteLine($"Введите {count}-е число ");
+                Console.Write($"Введите {count}-е число :");
                 int data = Input.Int32();
                 Last = new Point(data,First);
                 Element.Next = Last;
@@ -57,7 +57,48 @@ namespace Task_9
             return Element;
 
         }
+        /// <summary>
+        /// Найти элемент списка с заданым значением
+        /// </summary>
+        /// <param name="value">Заданое значение</param>
+        public void FindElement(int value)
+        {
+            if (First.Data == value)
+            {
+               Console.WriteLine(First.Data);
+            }
+            else
+            {
+                Point element = RecurrentSearch(First,value);
 
+            }
+        }
+        /// <summary>
+        /// Рекурентный поиска элемента в списке
+        /// </summary>
+        /// <param name="beg"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public Point RecurrentSearch(Point element, int value)
+        {
+            if (element.Next.Data == value)
+            {
+                Console.WriteLine("Элемент найден и принадлежит списку");
+                return element;
+            }
+            if (element.Next.Data == Last.Data)
+            {
+                Console.WriteLine("Элемент списка не найден");
+                return element;
+            }
+            else
+                return RecurrentSearch(element.Next, value);
+        }
+        /// <summary>
+        /// Удаление элемента в списке
+        /// </summary>
+        /// <param name="value">элемент для поиска</param>
+        /// <returns></returns>
         public Point Remove(int value)
         {
             if (First.Data == value)
@@ -86,9 +127,18 @@ namespace Task_9
                 element.Next = element.Next.Next;
                 return element;
             }
-           return RecurrentRemove(element.Next, value);
-        }
 
+            if (element.Next.Data == Last.Data)
+            {
+                Console.WriteLine("Элемент списка не найден");
+                return element;
+            }
+            else
+                return RecurrentRemove(element.Next, value);
+        }
+        /// <summary>
+        /// Печать элементов списка на экран
+        /// </summary>
         public void Print()
         {
             Point current = First;
@@ -99,7 +149,7 @@ namespace Task_9
                 Console.Write(current.Data+" ");
                 current = current.Next;
             }
-
+            Console.WriteLine();
         }
     }
 
