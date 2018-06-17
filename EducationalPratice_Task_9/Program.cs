@@ -1,5 +1,4 @@
 ﻿using System;
-using Validator;
 
 namespace Task_9
 {
@@ -30,10 +29,10 @@ namespace Task_9
             {
                 case "1"://Создание списка
                     Console.Write("Введите размер списка :");
-                    int n = Input.Int32();
+                    int n = MyLibary.Input.Int32InRange(1,100);
                     list = new MyList(n);
                     Console.Write("Введите 1 элемент списка :");
-                    int data = Input.Int32();
+                    int data = MyLibary.Input.Int();
                     try
                     {
                         MyPoint = list.RecurrentCreate(new Point(data, null));
@@ -62,7 +61,7 @@ namespace Task_9
                     break;
                 case "3"://Поиск элемента в списке
                     Console.Write("Введите элемент для поиска");
-                    int number = Input.Int32();
+                    int number = MyLibary.Input.Int();
                     try
                     {
                         list.FindElement(number);
@@ -77,7 +76,7 @@ namespace Task_9
                     break;
                 case "4"://Удаление элемента в списке
                     Console.Write("Введите элемент для удаления");
-                    number = Input.Int32();
+                    number = MyLibary.Input.Int();
                     try
                     {
                         list.Remove(number);

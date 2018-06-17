@@ -1,5 +1,4 @@
 ﻿using System;
-using Validator;
 
 namespace Task_9
 {
@@ -36,20 +35,20 @@ namespace Task_9
 
                     First = Element;
                     Console.Write($"Введите {count}-е число :");
-                    int data = Input.Int32();
+                    int data = MyLibary.Input.Int();
                     First.Next = RecurrentCreate(new Point(data, null));
                 }
                 else
                 {
                     Console.Write($"Введите {count}-е число :");
-                    int data = Input.Int32();
+                    int data = MyLibary.Input.Int();
                     Element.Next = RecurrentCreate(new Point(data, null));
                 }
             }
             else
             {
                 Console.Write($"Введите {count}-е число :");
-                int data = Input.Int32();
+                int data = MyLibary.Input.Int();
                 Last = new Point(data,First);
                 Element.Next = Last;
                 return Element;
@@ -169,26 +168,6 @@ namespace Task_9
         }
     }
 
-    public static class Input
-    {
-        /// <summary>
-        /// Ввод целого числа
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public static int Int32()
-        {
-            int res;
-            bool ok;
-            do
-            {
-                ok = int.TryParse(Console.ReadLine(), out res);
-                ok = res > 0;
-                if (!ok)
-                    Console.WriteLine("Вы ввели неправильное число, повторите попытку \n Введите число: ");
-            } while (!ok);
-            return res;
-        }
-    }
+    
 
 }
